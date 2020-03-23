@@ -1,6 +1,6 @@
-import abc
+import abc, interface_veiculo
 
-class Veiculo (abc.ABC):
+class Veiculo (interface_veiculo.InterfaceVeiculo,abc.ABC):
     """Essa é a classe veiculo. Esta classe é utilizada para instanciar novos veiculos"""
     def __init__ (self, cor, tipo_combustivel, potencia):
         self._cor = cor
@@ -13,13 +13,9 @@ class Veiculo (abc.ABC):
     def __del__ (self):
         print('o objeto foi deletado')
 
-    @abc.abstractclassmethod
+    
     def pintar (self,cor):
         self._cor = cor
-    
-    @property
-    def cor (self):
-        return self._cor
     
     def ligar (self):
         if self.__is_ligado == True :
@@ -27,6 +23,19 @@ class Veiculo (abc.ABC):
         else:
             self.__is_ligado = True
     
+    def desligar (self):
+        if self.__is_ligado == False :
+           print('O veiculo ja esta desligado')
+        else:
+            self.__is_ligado = False
+
+    @property
+    def cor (self):
+        return self._cor
+
     def acelerar (self, velocidade):
         self.__velocidade = velocidade
 
+    
+    def abastecer (self, qtd_combustivel):
+        self._qtd_combustivel += qtd_combustivel
